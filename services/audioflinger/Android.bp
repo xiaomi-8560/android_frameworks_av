@@ -224,6 +224,8 @@ cc_library {
         "libaudiohal_headers",
         "libaudioutils_headers",
         "libmedia_headers",
+        "dolby_ds_headers",
+        "dolby_vision_headers",
     ],
 
     export_shared_lib_headers: [

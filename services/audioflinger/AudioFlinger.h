@@ -47,6 +47,9 @@
 #include <optional>
 #include <set>
 
+// MIUI ADD: DOLBY_ENABLE
+#include "ds_config.h"
+
 namespace android {
 
 class AudioFlinger

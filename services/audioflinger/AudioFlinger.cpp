@@ -78,6 +78,9 @@
 #define ALOGVV(a...) do { } while(0)
 #endif
 
+// MIUI ADD: DOLBY_ENABLE
+#include "EffectDapController_impl.h"
+
 namespace android {
 
 using ::android::base::StringPrintf;
