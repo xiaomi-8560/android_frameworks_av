@@ -161,7 +161,7 @@ convertToHALStreamCombination(
     aidl::android::hardware::camera::device::StreamConfiguration &streamConfiguration,
     bool overrideForPerfClass, metadata_vendor_id_t vendorTagId,
     bool checkSessionParams, const std::vector<int32_t>& additionalKeys,
-    bool *earlyExit);
+    bool *earlyExit, bool isPriviledgedClient = false);
 
 StreamConfigurationPair getStreamConfigurationPair(const CameraMetadata &metadata);
 

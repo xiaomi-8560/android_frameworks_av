@@ -501,7 +501,7 @@ binder::Status createSurfaceFromGbp(
     uint64_t allowedFlags = GraphicBuffer::USAGE_SW_READ_MASK |
                            GraphicBuffer::USAGE_HW_TEXTURE |
                            GraphicBuffer::USAGE_HW_COMPOSER;
-    bool flexibleConsumer = (consumerUsage & disallowedFlags) == 0 &&
+    bool flexibleConsumer = !isPriviledgedClient && (consumerUsage & disallowedFlags) == 0 &&
             (consumerUsage & allowedFlags) != 0;
 
     surface = new Surface(gbp, useAsync);
@@ -790,7 +790,7 @@ convertToHALStreamCombination(
         aidl::android::hardware::camera::device::StreamConfiguration &streamConfiguration,
         bool overrideForPerfClass, metadata_vendor_id_t vendorTagId,
         bool checkSessionParams, const std::vector<int32_t>& additionalKeys,
-        bool *earlyExit) {
+        bool *earlyExit, bool isPriviledgedClient) {
     using SensorPixelMode = aidl::android::hardware::camera::metadata::SensorPixelMode;
     auto operatingMode = sessionConfiguration.getOperatingMode();
     binder::Status res = checkOperatingMode(operatingMode, deviceInfo,
@@ -952,7 +952,7 @@ convertToHALStreamCombination(
             res = createSurfaceFromGbp(streamInfo, isStreamInfoValid, surface, bufferProducer,
                     logicalCameraId, metadataChosen, sensorPixelModesUsed, dynamicRangeProfile,
                     streamUseCase, timestampBase, mirrorMode, colorSpace,
-                    /*respectSurfaceSize*/true);
+                    /*respectSurfaceSize*/true, isPriviledgedClient);
 
             if (!res.isOk())
                 return res;
